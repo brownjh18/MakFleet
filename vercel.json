@@ -1,0 +1,47 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "backend/vercel_main.py",
+      "use": "@vercel/python"
+    },
+    {
+      "src": "dashboard/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "dashboard/$1"
+    },
+    {
+      "src": "/dashboard/(.*)",
+      "dest": "dashboard/$1"
+    },
+    {
+      "src": "/login",
+      "dest": "dashboard/login.html"
+    },
+    {
+      "src": "/signup",
+      "dest": "dashboard/signup.html"
+    },
+    {
+      "src": "/forgot-password",
+      "dest": "dashboard/forgot-password.html"
+    },
+    {
+      "src": "/profile",
+      "dest": "dashboard/profile.html"
+    },
+    {
+      "src": "/",
+      "dest": "backend/vercel_main.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "backend/vercel_main.py"
+    }
+  ]
+}

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" id="html-root">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230ea5e9' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='5.5' cy='17.5' r='3.5'/%3E%3Ccircle cx='18.5' cy='17.5' r='3.5'/%3E%3Cpath d='M15 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-3 11.5V14l-3-4H4v3.5a3.5 3.5 0 1 0 7 0z'/%3E%3Cpath d='M9 10l3 4h4l2-5h-3'/%3E%3C/svg%3E">
+    <title>MakFleet AI - Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: { 50: '#f0f9ff', 100: '#e0f2fe', 200: '#bae6fd', 300: '#7dd3fc', 400: '#38bdf8', 500: '#0ea5e9', 600: '#0284c7', 700: '#0369a1', 800: '#075985', 900: '#0c4a6e' },
+                        accent: { 50: '#fdf4ff', 100: '#fae8ff', 200: '#f5d0fe', 300: '#f0abfc', 400: '#e879f9', 500: '#d946ef', 600: '#c026d3', 700: '#a21caf', 800: '#86198f', 900: '#701a75' },
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0f172a; color: #f1f5f9; }
+        .animated-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 25%, #312e81 50%, #1e1b4b 75%, #0f172a 100%); background-size: 400% 400%; animation: gradientShift 15s ease infinite; }
+        @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .orb { position: fixed; border-radius: 50%; filter: blur(80px); opacity: 0.3; animation: float 8s ease-in-out infinite; }
+        .orb-1 { width: 400px; height: 400px; background: radial-gradient(circle, #0ea5e9, transparent); top: -100px; right: -100px; }
+        .orb-2 { width: 300px; height: 300px; background: radial-gradient(circle, #d946ef, transparent); bottom: -50px; left: -50px; animation-delay: 2s; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        .glass-card { background: rgba(30, 41, 59, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(148, 163, 184, 0.1); border-radius: 24px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); }
+        .gradient-text { background: linear-gradient(135deg, #0ea5e9 0%, #d946ef 50%, #f59e0b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .input-field { background: rgba(51, 65, 85, 0.5); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 12px; padding: 14px 16px; color: #f1f5f9; transition: all 0.2s ease; }
+        .input-field:focus { outline: none; border-color: #0ea5e9; box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2); }
+        .input-field::placeholder { color: #64748b; }
+        .btn-primary { background: linear-gradient(135deg, #0ea5e9, #d946ef); color: white; font-weight: 600; padding: 14px 32px; border-radius: 12px; border: none; cursor: pointer; transition: all 0.3s ease; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(14, 165, 233, 0.4); }
+        .btn-primary:active { transform: translateY(0); }
+        .role-card { background: rgba(51, 65, 85, 0.5); border: 2px solid rgba(148, 163, 184, 0.1); border-radius: 16px; padding: 20px; cursor: pointer; transition: all 0.3s ease; }
+        .role-card:hover { border-color: rgba(14, 165, 233, 0.5); transform: translateY(-4px); }
+        .role-card.selected { border-color: #0ea5e9; background: rgba(14, 165, 233, 0.1); }
+        .error-message { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: #f87171; padding: 12px 16px; border-radius: 12px; margin-bottom: 16px; display: none; }
+        .success-message { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #34d399; padding: 12px 16px; border-radius: 12px; margin-bottom: 16px; display: none; }
+        .select-field { background: rgba(51, 65, 85, 0.5); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 12px; padding: 14px 16px; color: #f1f5f9; transition: all 0.2s ease; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; background-size: 16px; }
+        .select-field:focus { outline: none; border-color: #0ea5e9; box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2); }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <div class="animated-bg"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <div class="glass-card p-8 md:p-12 w-full max-w-md">
+        <!-- Logo -->
+        <div class="text-center mb-8">
+            <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center shadow-lg shadow-primary-500/30 mb-4">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <h1 class="text-3xl font-bold mb-2">MakFleet <span class="gradient-text">AI</span></h1>
+            <p class="text-slate-400">Create your account</p>
+        </div>
+
+        <!-- Error/Success Messages -->
+        <div id="error-message" class="error-message"></div>
+        <div id="success-message" class="success-message"></div>
+
+        <!-- Signup Form -->
+        <form id="signup-form" class="space-y-5">
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-2">First Name</label>
+                    <input type="text" id="first_name" name="first_name" class="input-field w-full" placeholder="John" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-2">Last Name</label>
+                    <input type="text" id="last_name" name="last_name" class="input-field w-full" placeholder="Doe" required>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-300 mb-2">Username</label>
+                <input type="text" id="username" name="username" class="input-field w-full" placeholder="Choose a username" required autocomplete="username">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-300 mb-2">Email</label>
+                <input type="email" id="email" name="email" class="input-field w-full" placeholder="your@email.com" required autocomplete="email">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-300 mb-2">Role</label>
+                <select id="role" name="role" class="select-field w-full" required>
+                    <option value="driver">Driver</option>
+                    <option value="admin">Administrator</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-300 mb-2">Password</label>
+                <div class="relative">
+                    <input type="password" id="password" name="password" class="input-field w-full" placeholder="Create a password" required autocomplete="new-password">
+                    <button type="button" onclick="togglePassword('password')" class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200">
+                        <svg id="eye-icon-password" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-300 mb-2">Confirm Password</label>
+                <div class="relative">
+                    <input type="password" id="confirm_password" name="confirm_password" class="input-field w-full" placeholder="Confirm your password" required>
+                    <button type="button" onclick="togglePassword('confirm_password')" class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200">
+                        <svg id="eye-icon-confirm" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-primary w-full flex items-center justify-center space-x-2">
+                <span>Create Account</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>
+            </button>
+        </form>
+
+        <!-- Login Link -->
+        <div class="mt-8 text-center">
+            <p class="text-sm text-slate-400">
+                Already have an account? 
+                <a href="/login" class="text-primary-400 hover:text-primary-300 font-medium transition-colors">Sign In</a>
+            </p>
+        </div>
+
+        <!-- Footer -->
+        <p class="text-center text-xs text-slate-500 mt-8">
+            &copy; 2026 MakFleet AI. Makerere University.
+        </p>
+    </div>
+
+    <script>
+        function togglePassword(fieldId) {
+            const passwordInput = document.getElementById(fieldId);
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+            } else {
+                passwordInput.type = 'password';
+            }
+        }
+
+        function showError(message) {
+            const errorEl = document.getElementById('error-message');
+            errorEl.textContent = message;
+            errorEl.style.display = 'block';
+            setTimeout(() => { errorEl.style.display = 'none'; }, 5000);
+        }
+
+        function showSuccess(message) {
+            const successEl = document.getElementById('success-message');
+            successEl.textContent = message;
+            successEl.style.display = 'block';
+        }
+
+        document.getElementById('signup-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const firstName = document.getElementById('first_name').value.trim();
+            const lastName = document.getElementById('last_name').value.trim();
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+            const role = document.getElementById('role').value;
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            
+            // Validate passwords match
+            if (password !== confirmPassword) {
+                showError('Passwords do not match');
+                return;
+            }
+            
+            // Validate password length
+            if (password.length < 6) {
+                showError('Password must be at least 6 characters');
+                return;
+            }
+            
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<svg class="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/></svg><span>Creating account...</span>';
+            
+            try {
+                const response = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username,
+                        email,
+                        password,
+                        full_name: `${firstName} ${lastName}`,
+                        role
+                    }),
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showSuccess('Account created successfully! Logging you in...');
+                    
+                    // Store token and user info
+                    localStorage.setItem('makfleet_token', data.access_token);
+                    localStorage.setItem('makfleet_user', JSON.stringify(data.user));
+                    
+                    // Redirect to dashboard
+                    setTimeout(() => {
+                        window.location.href = '/dashboard';
+                    }, 1000);
+                } else {
+                    showError(data.detail || 'Registration failed. Please try again.');
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<span>Create Account</span><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>';
+                }
+            } catch (error) {
+                showError('Connection error. Please check if the server is running.');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<span>Create Account</span><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>';
+            }
+        });
+
+        // Check if already logged in
+        window.addEventListener('DOMContentLoaded', function() {
+            const token = localStorage.getItem('makfleet_token');
+            if (token) {
+                window.location.href = '/dashboard';
+            }
+        });
+    </script>
+</body>
+</html>

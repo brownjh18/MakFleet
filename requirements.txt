@@ -1,0 +1,36 @@
+# MakFleet - Minimal Requirements for Vercel Deployment
+# For full development environment, see requirements-full.txt
+
+# FastAPI and server
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+
+# Database
+sqlalchemy==2.0.25
+
+# Pydantic for data validation
+pydantic==2.5.3
+
+# For environment variables
+python-dotenv==1.0.0
+
+# For API calls
+requests==2.31.0
+
+# JWT Authentication
+python-jose[cryptography]>=3.3.0
+passlib>=1.7.4
+bcrypt>=4.0.0
+
+# PostgreSQL adapter (for production)
+psycopg2-binary>=2.9.9
+
+# Utilities
+python-dateutil>=2.8.0
+pytz>=2023.0
+
+# Data processing (required for semantic pipeline)
+numpy>=1.24.0
+
+# Supabase for persistent database
+supabase>=2.3.0

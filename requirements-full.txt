@@ -1,0 +1,93 @@
+# MakFleet Spatio-Temporal AI System - Full Requirements
+# This file is for local development with all AI/ML features
+# For Vercel deployment, use requirements.txt (minimal version)
+
+# FastAPI and server
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+flask==3.0.0
+flask-cors==4.0.0
+
+# Database - SQLite (no installation required)
+sqlalchemy==2.0.25
+
+# PostgreSQL adapter (for production)
+psycopg2-binary>=2.9.9
+
+# Pydantic for data validation
+pydantic==2.5.3
+
+# For environment variables
+python-dotenv==1.0.0
+
+# For IoT Simulator and API calls
+requests==2.31.0
+
+# ============================================
+# AI and Machine Learning Components
+# ============================================
+
+# Deep Learning Framework
+torch>=2.0.0
+torch-geometric>=2.3.0
+
+# Traditional ML and Analysis
+scikit-learn>=1.3.0
+pandas>=2.0.0
+numpy>=1.24.0
+xgboost>=1.7.0
+
+# Explainable AI
+shap>=0.42.0
+
+# ============================================
+# Privacy and Security
+# ============================================
+
+cryptography>=41.0.0
+bcrypt>=4.0.0
+
+# JWT Authentication
+python-jose[cryptography]>=3.3.0
+passlib>=1.7.4
+
+# ============================================
+# Data Processing and Visualization
+# ============================================
+
+scipy>=1.11.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# ============================================
+# System Monitoring and Performance
+# ============================================
+
+psutil>=5.9.0
+
+# ============================================
+# Graph Database Integration
+# ============================================
+
+neo4j>=5.0.0
+
+# ============================================
+# Spatial Data and OpenStreetMap Integration
+# ============================================
+
+osmnx>=1.7.0
+geopandas>=0.13.0
+folium>=0.15.0
+
+# ============================================
+# Additional Utilities
+# ============================================
+
+python-dateutil>=2.8.0
+pytz>=2023.0
+
+# Dataclasses (for Python 3.6 compatibility)
+dataclasses>=0.6
+
+# For database migrations
+alembic>=1.12.0
